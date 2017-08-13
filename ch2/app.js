@@ -10,7 +10,10 @@ server.listen(3000);
 console.log('Server start!');
 
 function getFromClient(req, res) {
-  const content = ejs.render(indexPage);
+  const content = ejs.render(indexPage, {
+    title: "Indexページ",
+    content: "これはテンプレートを使ったサンプルページです。"
+  });
   res.writeHead(200, {'Content-Type': 'text/html'});
   res.write(content);
   res.end();
