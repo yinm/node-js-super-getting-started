@@ -3,6 +3,10 @@ const fs = require('fs');
 
 const server = http.createServer((req, res) => {
   fs.readFile('./index.html', 'utf-8', (error, data) => {
+    console.log('error---------------');
+    console.log(error);
+    console.log('data----------------');
+    console.log(data);
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(data);
     res.end();
