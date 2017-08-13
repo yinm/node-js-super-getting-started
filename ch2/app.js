@@ -1,7 +1,5 @@
 const http = require('http');
 const fs = require('fs');
-let request;
-let response;
 
 const server = http.createServer(getFromClient);
 
@@ -10,14 +8,13 @@ console.log('Server start!');
 
 // createServerの処理
 function getFromClient(req, res) {
-  request = req;
-  response = res;
-  fs.readFile('./index.html', 'utf-8', writeToResponse);
-}
+  fs.readFile('./index.html', 'utf-8', (error, data) => {
+    const content = data
+      .replace(/dummy_title/g, 'タイトルです')
+      .replace(/dummy_content/g, 'これがコンテンツです。');
 
-// readFile完了後の処理
-function writeToResponse(error, data) {
-  response.writeHead(200, {'Content-Type': 'text/html'});
-  response.write(data);
-  response.end();
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(content);
+    res.end();
+  });
 }
