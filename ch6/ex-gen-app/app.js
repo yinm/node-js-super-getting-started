@@ -35,6 +35,9 @@ var session_opt = {
 };
 app.use(session(session_opt));
 
+var validator = require('express-validator');
+app.use(validator());
+
 app.use('/', index);
 app.use('/users', users);
 app.use('/hello', hello);
