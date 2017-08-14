@@ -5,34 +5,26 @@ const app = express();
 app.engine('ejs', ejs.renderFile);
 app.use(express.static('public'));
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended: false}));
+
 app.get('/', (req, res) => {
   const msg =
     'This is Index Page!<br>'
-  + 'これは、トップページです。';
-  const url = '/other?name=taro&pass=yamada';
+  + 'メッセージを書いて送信してください。';
 
   res.render('index.ejs', {
     title: 'Index',
     content: msg,
-    link: {
-      href: url,
-      text: '別のページに移動',
-    },
   });
 });
 
-app.get('/other', (req, res) => {
-  const name = req.query.name;
-  const pass = req.query.pass;
-  const msg = 'あなたの名前は「' + name + '」<br>パスワードは「' + pass + '」です。';
+app.post('/', (req, res) => {
+  const msg = 'あなたは「<b>' + req.body.message + '</b>」と送信しました。';
 
   res.render('index.ejs', {
-    title: 'other',
+    title: 'Posted',
     content: msg,
-    link: {
-      href: '/',
-      text: 'トップに戻る',
-    },
   });
 });
 

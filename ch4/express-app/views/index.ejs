@@ -11,7 +11,10 @@
   </header>
   <main>
     <p><%- content %></p>
-    <p><a href="<%= link.href %>"><%= link.text %></a></p>
+    <form action="/" method="post">
+      <input type="text" name="message">
+      <input type="submit" value="送信">
+    </form>
   </main>
 </body>
 </html>
