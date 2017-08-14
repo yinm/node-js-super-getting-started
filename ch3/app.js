@@ -50,6 +50,7 @@ function responseIndex(req, res) {
 
     req.on('end', () => {
       data = qs.parse(body);
+      setCookie('msg', data.msg, res);
       writeIndex(req, res);
     });
 
@@ -81,17 +82,40 @@ function responseOther(req, res) {
   res.end();
 }
 
-
 function writeIndex(req, res) {
   const title = 'Index';
   const msg = '※伝言を表示します。';
+  const cookieData = getCookie('msg', req);
+
   const content = ejs.render(indexPage, {
     title: title,
     content: msg,
     data: data,
+    cookie_data: cookieData,
   });
 
   res.writeHead(200, {'Content-Type': 'text/html'});
   res.write(content);
   res.end();
+}
+
+function setCookie(key, value, res) {
+  const cookie = escape(value);
+  res.setHeader('Set-Cookie', [key + '=' + cookie]);
+}
+
+function getCookie(key, req) {
+  const cookieData = req.headers.cookie !== undefined
+    ? req.headers.cookie
+    : '';
+  const data = cookieData.split(';');
+
+  for (let i in data) {
+    if (data[i].trim().startsWith(key + '=')) {
+      const result = data[i].trim().substring(key.length + 1);
+      return unescape(result);
+    }
+  }
+
+  return '';
 }
