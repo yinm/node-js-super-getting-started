@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
           content: rows
         };
 
-        res.render('hello', data);
+        res.render('hello/index', data);
       }
     });
   });
