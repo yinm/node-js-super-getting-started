@@ -11,11 +11,14 @@
   </header>
   <div role="main">
     <p><%=content %></p>
-    <table>
-      <% for(var key in data) { %>
-        <%- include('data_item', {key:key, val:[data[key]]}) %>
-      <% } %>
+    <table style="width: 400px;">
+      <tr><th>伝言です！</th></tr>
+      <tr><td><%= data.msg %></td></tr>
     </table>
+    <form action="/" method="post">
+      MESSAGE <input type="text" name="msg">
+      <input type="submit" value="送信">
+    </form>
   </div>
 </body>
 </html>

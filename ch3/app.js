@@ -13,6 +13,8 @@ const server = http.createServer(getFromClient);
 server.listen(3000);
 console.log('Server start!');
 
+let data = {msg: 'no message...'};
+
 function getFromClient(req, res) {
   const urlParts = url.parse(req.url, true);
 
@@ -39,25 +41,22 @@ function getFromClient(req, res) {
 }
 
 function responseIndex(req, res) {
-  const title = 'Index';
-  const msg = 'これはIndexページです。';
-  const data = {
-    'Taro': '09-999-999',
-    'Hanako': '080-888-888',
-    'Sachiko': '070-777-777',
-    'Ichiro': '060-666-666'
-  };
+  if (req.method === 'POST') {
+    let body = '';
 
-  const content = ejs.render(indexPage, {
-    title: title,
-    content: msg,
-    data: data,
-    filename: 'data_item',
-  });
+    req.on('data', (data) => {
+      body += data;
+    });
 
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  res.write(content);
-  res.end();
+    req.on('end', () => {
+      data = qs.parse(body);
+      writeIndex(req, res);
+    });
+
+  } else {
+    writeIndex(req, res);
+  }
+
 }
 
 function responseOther(req, res) {
@@ -82,3 +81,17 @@ function responseOther(req, res) {
   res.end();
 }
 
+
+function writeIndex(req, res) {
+  const title = 'Index';
+  const msg = '※伝言を表示します。';
+  const content = ejs.render(indexPage, {
+    title: title,
+    content: msg,
+    data: data,
+  });
+
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.write(content);
+  res.end();
+}
