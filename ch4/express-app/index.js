@@ -13,9 +13,17 @@ app.get('/', (req, res) => {
     'This is Index Page!<br>'
   + 'メッセージを書いて送信してください。';
 
+  const data = {
+    'Taro': 'taro@yamada',
+    'Hanako': 'hanako@flower',
+    'Sachiko': 'sachiko@happy',
+    'Ichiro': 'ichiro@baseball',
+  };
+
   res.render('index.ejs', {
     title: 'Index',
     content: msg,
+    data: data,
   });
 });
 
