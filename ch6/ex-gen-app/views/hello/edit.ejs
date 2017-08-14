@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <header>
+    <h1><%= title %></h1>
+  </header>
+  <main>
+    <p><%= content %></p>
+    <form action="/hello/edit" method="post">
+      <input type="hidden" name="id" value="<%= mydata.id %>">
+
+      <p>
+        <label for="name">Name</label>
+        <input type="text" name="name" value="<%= mydata.name %>" id="name">
+      </p>
+      <p>
+        <label for="mail">Mail</label>
+        <input type="email" name="mail" value="<%= mydata.mail %>" id="mail">
+      </p>
+      <p>
+        <label for="age">Age</label>
+        <input type="number" name="age" value="<%= mydata.age %>" id="age">
+      </p>
+      <p>
+        <input type="submit" value="更新">
+      </p>
+    </form>
+  </main>
+</body>
+</html>
