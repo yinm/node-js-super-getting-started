@@ -24,9 +24,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var jquery = require('express-jquery');
-app.use(jquery('/jquery'));
-
 var ajax = require('./routes/ajax');
 app.use('/ajax', ajax);
 
