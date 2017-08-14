@@ -65,6 +65,7 @@ function responseOther(req, res) {
 
     // データ受信終了のイベント処理
     req.on('end', () => {
+      console.log(body);
       const postData = qs.parse(body);
       let msg = 'これはOtherページです。';
       msg += 'あなたは、「' + postData.msg + '」と書きました。';
