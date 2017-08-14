@@ -9,21 +9,22 @@ app.get('/', (req, res) => {
   const msg =
     'This is Index Page!<br>'
   + 'これは、トップページです。';
+  const url = '/other?name=taro&pass=yamada';
 
   res.render('index.ejs', {
     title: 'Index',
     content: msg,
     link: {
-      href: '/other',
+      href: url,
       text: '別のページに移動',
     },
   });
 });
 
 app.get('/other', (req, res) => {
-  const msg =
-    'This is Other Page!<br>'
-  + 'これは、用意された別のページです。';
+  const name = req.query.name;
+  const pass = req.query.pass;
+  const msg = 'あなたの名前は「' + name + '」<br>パスワードは「' + pass + '」です。';
 
   res.render('index.ejs', {
     title: 'other',
