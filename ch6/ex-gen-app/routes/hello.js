@@ -74,18 +74,9 @@ router.post('/add', (req, res, next) => {
       res.render('hello/add', data);
 
     } else {
-      const name = req.body.name;
-      const mail = req.body.mail;
-      const age = req.body.age;
-
-      db.run(
-        'insert into mydata (name, mail, age) values (?, ?, ?)',
-        name,
-        mail,
-        age
-      );
-
-      res.redirect('/hello');
+      new MyData(req.body).save().then((model) => {
+        res.redirect('/hello');
+      });
     }
   });
 
