@@ -44,4 +44,24 @@ router.post('/add', (req, res, next) => {
   res.redirect('/hello');
 });
 
+router.get('/show', (req, res, next) => {
+  const id = req.query.id;
+
+  db.serialize(() => {
+    const query = 'select * from mydata where id = ?';
+
+    db.get(query, [id], (err, row) => {
+      if (!err) {
+        const data = {
+          title: 'Hello/show',
+          content: 'id = ' + id + ' のレコード:',
+          mydata: row
+        };
+
+        res.render('hello/show', data);
+      }
+    });
+  });
+});
+
 module.exports = router;
