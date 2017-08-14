@@ -10,4 +10,13 @@ router.get('/', (req, res, next) => {
   res.render('hello', data);
 });
 
+router.get('/welcome', (req, res, next) => {
+  const data = {
+    title: 'Welcome!',
+    content: 'Welcome page',
+  };
+
+  res.render('hello', data);
+});
+
 module.exports = router;
