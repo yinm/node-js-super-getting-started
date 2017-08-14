@@ -41,10 +41,17 @@ function getFromClient(req, res) {
 function responseIndex(req, res) {
   const title = 'Index';
   const msg = 'これはIndexページです。';
+  const data = {
+    'Taro': '09-999-999',
+    'Hanako': '080-888-888',
+    'Sachiko': '070-777-777',
+    'Ichiro': '060-666-666'
+  };
 
   const content = ejs.render(indexPage, {
     title: title,
     content: msg,
+    data: data,
   });
 
   res.writeHead(200, {'Content-Type': 'text/html'});
@@ -65,7 +72,6 @@ function responseOther(req, res) {
 
     // データ受信終了のイベント処理
     req.on('end', () => {
-      console.log(body);
       const postData = qs.parse(body);
       let msg = 'これはOtherページです。';
       msg += 'あなたは、「' + postData.msg + '」と書きました。';
