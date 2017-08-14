@@ -52,6 +52,7 @@ function responseIndex(req, res) {
     title: title,
     content: msg,
     data: data,
+    filename: 'data_item',
   });
 
   res.writeHead(200, {'Content-Type': 'text/html'});
