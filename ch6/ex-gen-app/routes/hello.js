@@ -163,4 +163,31 @@ router.post('/delete', (req, res, next) => {
   res.redirect('/hello');
 });
 
+router.get('/find', (req, res, next) => {
+  const data = {
+    title: '/Hello/Find',
+    content: '検索IDを入力:',
+    form: {fstr: ''},
+    mydata: null
+  };
+
+  res.render('hello/find', data);
+});
+
+router.post('/find', (req, res, next) => {
+  new MyData()
+    .where('id', '=', req.body.fstr)
+    .fetch()
+    .then((collection) => {
+      const data = {
+        title: 'Hello!',
+        content: 'id = ' + req.body.fstr + ' の検索結果:',
+        form: req.body,
+        mydata: collection
+      };
+
+      res.render('hello/find', data);
+    });
+});
+
 module.exports = router;
