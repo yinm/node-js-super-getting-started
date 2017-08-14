@@ -11,10 +11,11 @@
   </header>
   <main>
     <p><%- content %></p>
-    <form action="/" method="post">
-      <input type="text" name="message">
-      <input type="submit" value="送信">
-    </form>
+    <table style="width: 85%;">
+      <% for(var key in data) { %>
+        <%- include('data_item', {key: key, val: data[key]}) %>
+      <% } %>
+    </table>
   </main>
 </body>
 </html>
