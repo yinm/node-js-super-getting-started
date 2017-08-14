@@ -62,42 +62,23 @@ function responseIndex(req, res) {
 
 function responseOther(req, res) {
   const title = 'Other';
+  const msg = 'これはOtherページです。';
+  const data = {
+    'Taro': ['taro@yamada', '09-999-999', 'Tokyo'],
+    'Hanako': ['hanako@flower', '080-888-888', 'Yokohama'],
+    'Sachiko': ['sachi@happy', '070-777-777', 'Nagoya'],
+    'Ichiro': ['ichi@baseball', '060-666-666', 'USA'],
+  };
 
-  if (req.method === 'POST') {
-    let body = '';
+  const content = ejs.render(otherPage, {
+    title: title,
+    content: msg,
+    data: data,
+    filename: 'data_item',
+  });
 
-    // データ受信のイベント処理
-    req.on('data', (data) => {
-      body += data;
-    });
-
-    // データ受信終了のイベント処理
-    req.on('end', () => {
-      const postData = qs.parse(body);
-      let msg = 'これはOtherページです。';
-      msg += 'あなたは、「' + postData.msg + '」と書きました。';
-
-      const content = ejs.render(otherPage, {
-        title: title,
-        content: msg,
-      });
-
-      res.writeHead(200, {'Content-Type': 'text/html'});
-      res.write(content);
-      res.end();
-    });
-
-  } else {
-     const msg = 'ページがありません';
-     const content = ejs.render(otherPage, {
-       title: title,
-       content: msg,
-     });
-
-     res.writeHead(200, {'Content-Type': 'text/html'});
-     res.write(content);
-     res.end();
-  }
-
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.write(content);
+  res.end();
 }
 
