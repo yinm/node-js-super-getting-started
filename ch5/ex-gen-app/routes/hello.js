@@ -64,4 +64,36 @@ router.get('/show', (req, res, next) => {
   });
 });
 
+router.get('/edit', (req, res, next) => {
+  const id = req.query.id;
+
+  db.serialize(() => {
+    const q = 'select * from mydata where id = ?';
+
+    db.get(q, [id], (err, row) => {
+      if (!err) {
+        const data = {
+          title: 'hello/edit',
+          content: 'id = ' + id + ' のレコードを編集:',
+          mydata: row
+        };
+
+        res.render('hello/edit', data);
+      }
+    });
+  });
+});
+
+router.post('/edit', (req, res, next) => {
+  const id = req.body.id;
+  const name = req.body.name;
+  const mail = req.body.mail;
+  const age = req.body.age;
+
+  const query = 'update mydata set name = ?, mail = ?, age = ? where id = ?';
+  db.run(query, name, mail, age, id);
+
+  res.redirect('/hello');
+});
+
 module.exports = router;
