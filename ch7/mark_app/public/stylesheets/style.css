@@ -1,8 +1,55 @@
+.mark_area {
+  border: solid #aaa 1px;
+  margin: 30px;
+  padding: 10px 20px;
+}
+
+h1 {
+  font-size: 60pt;
+  color: #eee;
+  text-align: right;
+  margin: 0;
+}
+h2 {
+  font: 20px "lucida grande", helvetica, arial, sans-serif;
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 10px;
+  font: 16px "lucida grande", helvetica, arial, sans-serif;
+  color: #999;
+  margin: 5px;
+}
+p {
+  font: 16px "lucida grande", helvetica, arial, sans-serif;
+  margin: 0 20px;
+}
+pre {
+  background-color: #f6f6f6;
+  padding: 10px 20px;
 }
 
 a {
-  color: #00B7FF;
+  color: #aaa;
+}
+
+table {
+  margin: 20px;
+}
+table tr th {
+  background-color: #999;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+}
+table tr td {
+  background-color: #eee;
+  color: #666;
+  text-align: left;
+  padding: 5px 10px;
+}
+.error {
+  color: #f00;
+}
+span.login_name {
+  font-weight: bold;
 }
