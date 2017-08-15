@@ -1,5 +1,5 @@
 const express = require('express');
-cosnt router = express.Router();
+const router = express.Router();
 
 const knex = require('knex')({
   dialect: 'sqlite3',
